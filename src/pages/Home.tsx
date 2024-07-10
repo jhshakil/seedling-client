@@ -4,7 +4,7 @@ const Home = () => {
   const { data } = useGetProductsQuery(undefined);
 
   console.log(data);
-  return <div>Home</div>;
+  return <div className="min-h-screen">Home</div>;
 };
 
 export default Home;
