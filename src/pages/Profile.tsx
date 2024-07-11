@@ -1,11 +1,17 @@
+"use client";
+
+import ProductAddDialog from "@/components/dialog/ProductAddDialog";
 import ProductTable from "@/components/table/ProductTable";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 import { TProduct } from "@/types/product.type";
+import { useState } from "react";
 
 const Profile = () => {
   const { data, isLoading, error } = useGetProductsQuery(undefined);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -32,9 +38,13 @@ const Profile = () => {
     <div className="px-8 py-12">
       <div className="flex justify-between border-b border-border pb-4">
         <h2 className="text-3xl font-bold">Product List</h2>
-        <Button>Add Product</Button>
+        <Button onClick={() => setDialogOpen(true)}>Add Product</Button>
       </div>
       <ProductTable products={data.data as TProduct[]} />
+      <ProductAddDialog
+        open={dialogOpen}
+        closeDialog={() => setDialogOpen(false)}
+      />
     </div>
   );
 };

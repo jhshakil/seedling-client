@@ -12,25 +12,15 @@ const Navigation = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link to="/">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Product
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/profile">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Product
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link to="/">Home</Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link to="/">Product</Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link to="/profile">Profile</Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
