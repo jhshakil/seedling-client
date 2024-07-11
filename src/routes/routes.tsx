@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import MainLayout from "../components/layout/MainLayout";
+import Profile from "@/pages/Profile";
 
 const routes = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: <App />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

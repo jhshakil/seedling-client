@@ -25,6 +25,13 @@ const Navigation = () => {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link to="/profile">
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Product
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );

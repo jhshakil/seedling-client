@@ -1,9 +1,11 @@
 import { ShoppingBag, Users } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import Logo from "./Logo";
 import Search from "./Search";
 import { Badge } from "../ui/badge";
 import Navigation from "./Navigation";
+import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   return (
@@ -15,13 +17,15 @@ const Header = () => {
             <Search />
           </div>
           <div className="flex gap-3">
-            <Button
-              variant="outline"
-              size="icon"
-              className="border-none hover:bg-background"
+            <Link
+              to="/profile"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "icon" }),
+                "border-none hover:bg-background"
+              )}
             >
               <Users className="h-6 w-6" />
-            </Button>
+            </Link>
             <Button
               variant="outline"
               size="icon"
