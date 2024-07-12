@@ -23,7 +23,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Textarea } from "../ui/textarea";
 import { Switch } from "../ui/switch";
-import { useCreateProductMutation } from "@/redux/features/product/productApi";
+import { TProduct } from "@/types/product.type";
+import { useEffect, useState } from "react";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -52,29 +53,57 @@ const FormSchema = z.object({
 });
 
 type Props = {
+  product: TProduct;
   open: boolean;
   closeDialog: () => void;
+  submitData: (data: TProduct) => void;
 };
 
-const ProductAddDialog = ({ open, closeDialog }: Props) => {
-  const [createProduct] = useCreateProductMutation();
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      title: "",
-      description: "",
-      category: "",
-      image: "",
-      isStock: true,
-      price: 0,
-      quantity: 1,
-      rating: 1,
-    },
+const ProductUpdateDialog = ({
+  product,
+  open,
+  closeDialog,
+  submitData,
+}: Props) => {
+  const [defaultValues, setDefaultValues] = useState({
+    title: "",
+    description: "",
+    category: "",
+    image: "",
+    isStock: true,
+    price: 0,
+    quantity: 3,
+    rating: 2,
   });
 
+  useEffect(() => {
+    setTimeout(() => {
+      setDefaultValues({
+        title: product.title,
+        description: product.description,
+        category: product.category,
+        image: product.image,
+        isStock: product.isStock,
+        price: product.price,
+        quantity: product.quantity,
+        rating: product.rating,
+      });
+    }, 1000);
+  }, [product]);
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    defaultValues: defaultValues,
+    resolver: zodResolver(FormSchema),
+  });
+
+  useEffect(() => {
+    form.reset(defaultValues);
+  }, [defaultValues, form]);
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    createProduct(data);
+    console.log("hi");
+    console.log(data);
+    submitData(data);
     toast("Submit Successfully");
     form.reset({
       title: "",
@@ -241,4 +270,4 @@ const ProductAddDialog = ({ open, closeDialog }: Props) => {
   );
 };
 
-export default ProductAddDialog;
+export default ProductUpdateDialog;

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -10,12 +12,29 @@ import {
 import { TProduct } from "@/types/product.type";
 import { Button } from "../ui/button";
 import { Edit, Trash } from "lucide-react";
+import {
+  useDeleteProductMutation,
+  useUpdateProductMutation,
+} from "@/redux/features/product/productApi";
+import { useState } from "react";
+import ProductUpdateDialog from "../dialog/ProductUpdateDialog";
 
 type Props = {
   products: TProduct[];
 };
 
 const ProductTable = ({ products }: Props) => {
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<TProduct>();
+
+  const [updateProduct] = useUpdateProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
+
+  const updateProductData = (data: TProduct) => {
+    data._id = selectedProduct?._id;
+    updateProduct(data);
+  };
+
   return (
     <div className="w-full">
       <Table>
@@ -45,6 +64,10 @@ const ProductTable = ({ products }: Props) => {
                   variant="outline"
                   size="icon"
                   className="border-none hover:bg-background relative"
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setOpenEditDialog(true);
+                  }}
                 >
                   <Edit className="h-6 w-6" />
                 </Button>
@@ -52,6 +75,7 @@ const ProductTable = ({ products }: Props) => {
                   variant="outline"
                   size="icon"
                   className="border-none hover:bg-background relative"
+                  onClick={() => deleteProduct(product)}
                 >
                   <Trash className="h-6 w-6" />
                 </Button>
@@ -60,6 +84,14 @@ const ProductTable = ({ products }: Props) => {
           ))}
         </TableBody>
       </Table>
+      {selectedProduct && (
+        <ProductUpdateDialog
+          product={selectedProduct}
+          open={openEditDialog}
+          closeDialog={() => setOpenEditDialog(false)}
+          submitData={(data: TProduct) => updateProductData(data)}
+        />
+      )}
     </div>
   );
 };
