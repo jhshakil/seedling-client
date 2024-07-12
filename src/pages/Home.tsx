@@ -1,4 +1,5 @@
 import Hero from "@/components/hero/Hero";
+import ProductHome from "@/components/product/ProductHome";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <Hero />
+      <ProductHome />
     </div>
   );
 };
