@@ -18,6 +18,8 @@ import {
 } from "@/redux/features/product/productApi";
 import { useState } from "react";
 import ProductUpdateDialog from "../dialog/ProductUpdateDialog";
+import DeleteProduct from "../dialog/DeleteProduct";
+import { toast } from "sonner";
 
 type Props = {
   products: TProduct[];
@@ -25,14 +27,29 @@ type Props = {
 
 const ProductTable = ({ products }: Props) => {
   const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<TProduct>();
 
-  const [updateProduct] = useUpdateProductMutation();
-  const [deleteProduct] = useDeleteProductMutation();
+  const [updateProduct, { error: updateError }] = useUpdateProductMutation();
+  const [deleteProduct, { error: deleteError }] = useDeleteProductMutation();
 
   const updateProductData = (data: TProduct) => {
     data._id = selectedProduct?._id;
     updateProduct(data);
+    if (updateError) {
+      toast("Update Fail");
+    } else {
+      toast("Update Successfully");
+    }
+  };
+
+  const deleteProductData = () => {
+    deleteProduct(selectedProduct);
+    if (deleteError) {
+      toast("Delete Fail");
+    } else {
+      toast("Delete Successfully");
+    }
   };
 
   return (
@@ -55,7 +72,14 @@ const ProductTable = ({ products }: Props) => {
             <TableRow key={product._id}>
               <TableCell className="font-medium">{product.title}</TableCell>
               <TableCell>{product.category}</TableCell>
-              <TableCell>{product.image}</TableCell>
+              <TableCell>
+                <img
+                  width={30}
+                  height={30}
+                  src={product.image}
+                  alt="product image"
+                />
+              </TableCell>
               <TableCell>{product.price}</TableCell>
               <TableCell>{product.quantity}</TableCell>
               <TableCell>{product.rating}</TableCell>
@@ -75,7 +99,10 @@ const ProductTable = ({ products }: Props) => {
                   variant="outline"
                   size="icon"
                   className="border-none hover:bg-background relative"
-                  onClick={() => deleteProduct(product)}
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setOpenDeleteDialog(true);
+                  }}
                 >
                   <Trash className="h-6 w-6" />
                 </Button>
@@ -85,12 +112,19 @@ const ProductTable = ({ products }: Props) => {
         </TableBody>
       </Table>
       {selectedProduct && (
-        <ProductUpdateDialog
-          product={selectedProduct}
-          open={openEditDialog}
-          closeDialog={() => setOpenEditDialog(false)}
-          submitData={(data: TProduct) => updateProductData(data)}
-        />
+        <>
+          <ProductUpdateDialog
+            product={selectedProduct}
+            open={openEditDialog}
+            closeDialog={() => setOpenEditDialog(false)}
+            submitData={(data: TProduct) => updateProductData(data)}
+          />
+          <DeleteProduct
+            open={openDeleteDialog}
+            closeDialog={() => setOpenDeleteDialog(false)}
+            submitData={() => deleteProductData()}
+          />
+        </>
       )}
     </div>
   );

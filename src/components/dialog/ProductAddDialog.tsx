@@ -57,7 +57,7 @@ type Props = {
 };
 
 const ProductAddDialog = ({ open, closeDialog }: Props) => {
-  const [createProduct] = useCreateProductMutation();
+  const [createProduct, { error }] = useCreateProductMutation();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -75,18 +75,22 @@ const ProductAddDialog = ({ open, closeDialog }: Props) => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     createProduct(data);
-    toast("Submit Successfully");
-    form.reset({
-      title: "",
-      description: "",
-      category: "",
-      image: "",
-      isStock: true,
-      price: 0,
-      quantity: 1,
-      rating: 1,
-    });
-    closeDialog();
+    if (error) {
+      toast("Product Add Fail");
+    } else {
+      toast("Product Add Successfully");
+      form.reset({
+        title: "",
+        description: "",
+        category: "",
+        image: "",
+        isStock: true,
+        price: 0,
+        quantity: 1,
+        rating: 1,
+      });
+      closeDialog();
+    }
   }
 
   const dialogClose = () => {

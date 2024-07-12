@@ -20,7 +20,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { Textarea } from "../ui/textarea";
 import { Switch } from "../ui/switch";
 import { TProduct } from "@/types/product.type";
@@ -101,10 +100,7 @@ const ProductUpdateDialog = ({
   }, [defaultValues, form]);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("hi");
-    console.log(data);
     submitData(data);
-    toast("Submit Successfully");
     form.reset({
       title: "",
       description: "",
