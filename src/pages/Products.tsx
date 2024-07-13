@@ -1,4 +1,13 @@
 import ProductCard from "@/components/product/ProductCard";
+// import {
+//   Pagination,
+//   PaginationContent,
+//   PaginationEllipsis,
+//   PaginationItem,
+//   PaginationLink,
+//   PaginationNext,
+//   PaginationPrevious,
+// } from "@/components/ui/pagination";
 import {
   Select,
   SelectContent,
@@ -20,6 +29,7 @@ import { useState } from "react";
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
+  // const [selectedPage, setSelectedPage] = useState("");
 
   const { data, isLoading, error } = useGetProductsQuery({
     category: selectedCategory,
@@ -108,13 +118,41 @@ const Products = () => {
         </div>
       </div>
       {data.data && data.data.length && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-8">
-          {data.data.map((item: TProduct) => (
-            <div key={item._id}>
-              <ProductCard product={item} />
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-8">
+            {data.data.map((item: TProduct) => (
+              <div key={item._id}>
+                <ProductCard product={item} />
+              </div>
+            ))}
+          </div>
+          <div className="mt-10">
+            {/* <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#" isActive>
+                    2
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">3</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination> */}
+          </div>
+        </>
       )}
     </section>
   );

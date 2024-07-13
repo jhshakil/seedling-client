@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 import { TProduct } from "@/types/product.type";

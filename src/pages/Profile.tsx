@@ -1,5 +1,3 @@
-"use client";
-
 import ProductAddDialog from "@/components/dialog/ProductAddDialog";
 import ProductTable from "@/components/table/ProductTable";
 import { Button } from "@/components/ui/button";

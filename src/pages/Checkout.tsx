@@ -14,6 +14,7 @@ import { resetCart } from "@/redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/redux/features/checkout/checkoutApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -30,7 +31,7 @@ const FormSchema = z.object({
 
 const Checkout = () => {
   const { carts } = useAppSelector((state) => state.carts);
-  const [createOrder, { error }] = useCreateOrderMutation();
+  const [createOrder, { data, error }] = useCreateOrderMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -58,10 +59,15 @@ const Checkout = () => {
         cash_on_delivery: true,
       });
       dispatch(resetCart());
+    }
+  }
+
+  useEffect(() => {
+    if (data) {
       navigate("/");
       window.location.reload();
     }
-  }
+  }, [data]);
 
   return (
     <section className="px-8 py-12 max-w-[600px] mx-auto">
