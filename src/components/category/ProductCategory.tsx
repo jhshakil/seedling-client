@@ -28,7 +28,7 @@ const ProductCategory = () => {
 
   return (
     <section className="container my-12">
-      <h2 className="text-2xl my-4 font-bold text-center">Top Category</h2>
+      <h2 className="text-3xl my-4 font-bold text-center">Top Category</h2>
       {data.data && data.data.length && (
         <div className="grid grid-cols-4 gap-5 mt-8">
           {data.data.map((item: string) => (

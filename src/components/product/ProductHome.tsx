@@ -29,7 +29,7 @@ const ProductHome = () => {
 
   return (
     <section className="container my-12">
-      <h2 className="text-2xl my-4 font-bold text-center">
+      <h2 className="text-3xl my-4 font-bold text-center">
         Top Selling Products
       </h2>
       {data.data && data.data.length && (
