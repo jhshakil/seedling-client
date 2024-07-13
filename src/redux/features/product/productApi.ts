@@ -4,11 +4,22 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (data) => {
+        const params = new URLSearchParams();
+
+        if (data.searchTerm) {
+          params.append("searchTerm", data.searchTerm);
+        }
+        if (data.category) {
+          params.append("category", data.category);
+        }
+        if (data.sort) {
+          params.append("sort", data.sort);
+        }
+
         return {
-          url: `/product?${
-            data?.searchTerm ? `searchTerm=${data.searchTerm}` : ""
-          }`,
+          url: "/product",
           method: "GET",
+          params: params,
         };
       },
       providesTags: ["product"],
@@ -43,6 +54,13 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["product"],
     }),
+    getCategories: builder.query({
+      query: () => ({
+        url: `/category`,
+        method: "GET",
+      }),
+      providesTags: ["product"],
+    }),
   }),
 });
 
@@ -52,4 +70,5 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetCategoriesQuery,
 } = productApi;

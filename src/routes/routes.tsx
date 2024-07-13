@@ -3,6 +3,7 @@ import App from "../App";
 import MainLayout from "../components/layout/MainLayout";
 import Profile from "@/pages/Profile";
 import ProductDetails from "@/pages/ProductDetails";
+import Products from "@/pages/Products";
 
 const routes = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: <App />,
+      },
+      {
+        path: "/product/",
+        element: <Products />,
       },
       {
         path: "/product/:id",

@@ -24,7 +24,6 @@ const Search = () => {
     setTimeOutValue(timeValue);
   };
 
-  console.log(searchValue);
   const { data } = useGetProductsQuery({
     searchTerm: searchValue,
   });

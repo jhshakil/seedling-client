@@ -16,7 +16,7 @@ const Navigation = () => {
             <Link to="/">Home</Link>
           </NavigationMenuLink>
           <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-            <Link to="/">Product</Link>
+            <Link to="/product">Product</Link>
           </NavigationMenuLink>
           <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
             <Link to="/profile">Profile</Link>
