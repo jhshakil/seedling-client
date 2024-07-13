@@ -34,13 +34,11 @@ const FormSchema = z.object({
   }),
   description: z.string(),
   image: z.string(),
-  isStock: z.boolean(),
+  inStock: z.boolean(),
   price: z.coerce.number().min(1, {
     message: "price must be at least 1.",
   }),
-  quantity: z.coerce.number().min(1, {
-    message: "quantity must be at least 1.",
-  }),
+  quantity: z.coerce.number(),
   rating: z.coerce
     .number()
     .min(1, {
@@ -66,7 +64,7 @@ const ProductAddDialog = ({ open, closeDialog }: Props) => {
       description: "",
       category: "",
       image: "",
-      isStock: true,
+      inStock: true,
       price: 0,
       quantity: 1,
       rating: 1,
@@ -84,7 +82,7 @@ const ProductAddDialog = ({ open, closeDialog }: Props) => {
         description: "",
         category: "",
         image: "",
-        isStock: true,
+        inStock: true,
         price: 0,
         quantity: 1,
         rating: 1,
@@ -168,10 +166,10 @@ const ProductAddDialog = ({ open, closeDialog }: Props) => {
             />
             <FormField
               control={form.control}
-              name="isStock"
+              name="inStock"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>IsStock</FormLabel>
+                  <FormLabel>InStock</FormLabel>
                   <FormControl>
                     <Switch
                       checked={field.value}

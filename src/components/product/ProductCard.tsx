@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -11,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { addCart } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/product.type";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -28,23 +30,39 @@ const ProductCard = ({ product }: Props) => {
   const { carts } = useAppSelector((state) => state.carts);
 
   const addToCart = (product: TProduct) => {
-    dispatch(addCart(product));
-    toast("Product AddToCart");
+    console.log(disableBtn);
+    if (!disableBtn) {
+      dispatch(addCart(product));
+      toast("Product AddToCart");
+    }
     disableCart(product);
   };
 
-  const disableCart = (data: TProduct) => {
-    if (carts) {
-      const product = carts.find((el) => el._id === data._id);
-      if (product) {
-        if (data.quantity <= product.quantity) {
-          setDisableBtn(true);
-        } else {
-          setDisableBtn(false);
+  const disableCart = useCallback(
+    (data: TProduct) => {
+      if (data.inStock) {
+        if (carts) {
+          const productData = carts.find((el) => el._id === data._id);
+          if (productData) {
+            if (data.quantity <= productData.quantity) {
+              setDisableBtn(true);
+            } else {
+              setDisableBtn(false);
+            }
+          }
         }
+      } else {
+        setDisableBtn(true);
       }
+    },
+    [carts]
+  );
+
+  useEffect(() => {
+    if (product) {
+      disableCart(product);
     }
-  };
+  }, [product, disableCart]);
 
   return (
     <Card className="w-full">
