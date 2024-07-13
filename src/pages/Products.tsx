@@ -1,13 +1,4 @@
 import ProductCard from "@/components/product/ProductCard";
-// import {
-//   Pagination,
-//   PaginationContent,
-//   PaginationEllipsis,
-//   PaginationItem,
-//   PaginationLink,
-//   PaginationNext,
-//   PaginationPrevious,
-// } from "@/components/ui/pagination";
 import {
   Select,
   SelectContent,
@@ -29,7 +20,6 @@ import { useState } from "react";
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
-  // const [selectedPage, setSelectedPage] = useState("");
 
   const { data, isLoading, error } = useGetProductsQuery({
     category: selectedCategory,
@@ -125,32 +115,6 @@ const Products = () => {
                 <ProductCard product={item} />
               </div>
             ))}
-          </div>
-          <div className="mt-10">
-            {/* <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious href="#" />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#" isActive>
-                    2
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationEllipsis />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext href="#" />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination> */}
           </div>
         </>
       )}
