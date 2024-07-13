@@ -1,13 +1,16 @@
 import { ShoppingBag, Users } from "lucide-react";
-import { Button, buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 import Logo from "./Logo";
 import Search from "./Search";
 import { Badge } from "../ui/badge";
 import Navigation from "./Navigation";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAppSelector } from "@/redux/hooks";
 
 const Header = () => {
+  const { carts } = useAppSelector((state) => state.carts);
+
   return (
     <div>
       <div className="border-b border-border">
@@ -26,14 +29,18 @@ const Header = () => {
             >
               <Users className="h-6 w-6" />
             </Link>
-            <Button
-              variant="outline"
-              size="icon"
-              className="border-none hover:bg-background relative"
+            <Link
+              to="/cart"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "icon" }),
+                "border-none hover:bg-background relative"
+              )}
             >
               <ShoppingBag className="h-6 w-6" />
-              <Badge className="absolute -top-1 -end-1 px-1.5">5</Badge>
-            </Button>
+              <Badge className="absolute -top-1 -end-1 px-1.5">
+                {carts.length}
+              </Badge>
+            </Link>
           </div>
         </div>
       </div>

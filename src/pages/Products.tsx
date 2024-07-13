@@ -1,12 +1,4 @@
-import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import ProductCard from "@/components/product/ProductCard";
 import {
   Select,
   SelectContent,
@@ -17,14 +9,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
+
 import {
   useGetCategoriesQuery,
   useGetProductsQuery,
 } from "@/redux/features/product/productApi";
 import { TProduct } from "@/types/product.type";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -119,40 +110,9 @@ const Products = () => {
       {data.data && data.data.length && (
         <div className="grid grid-cols-4 gap-5 mt-8">
           {data.data.map((item: TProduct) => (
-            <Card key={item._id} className="w-full">
-              <img
-                className="aspect-square object-cover"
-                src={item.image}
-                alt="Product Image"
-              />
-              <CardHeader>
-                <CardTitle>{item.title}</CardTitle>
-                <CardDescription>
-                  <span className="font-bold">Category:</span> {item.category}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between gap-4">
-                  <p>
-                    <span className="text-lg font-bold">Price:</span>{" "}
-                    {item.price}$
-                  </p>
-                  <p>
-                    <span className="text-lg font-bold">Rating:</span>{" "}
-                    {item.rating}
-                  </p>
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <Link
-                  to={`/product/${item._id}`}
-                  className={cn(buttonVariants({ variant: "outline" }))}
-                >
-                  Details
-                </Link>
-                <Button>Add To Cart</Button>
-              </CardFooter>
-            </Card>
+            <div key={item._id}>
+              <ProductCard product={item} />
+            </div>
           ))}
         </div>
       )}

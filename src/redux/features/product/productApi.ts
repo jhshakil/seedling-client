@@ -6,14 +6,16 @@ const productApi = baseApi.injectEndpoints({
       query: (data) => {
         const params = new URLSearchParams();
 
-        if (data.searchTerm) {
-          params.append("searchTerm", data.searchTerm);
-        }
-        if (data.category) {
-          params.append("category", data.category);
-        }
-        if (data.sort) {
-          params.append("sort", data.sort);
+        if (data) {
+          if (data.searchTerm) {
+            params.append("searchTerm", data.searchTerm);
+          }
+          if (data.category) {
+            params.append("category", data.category);
+          }
+          if (data.sort) {
+            params.append("sort", data.sort);
+          }
         }
 
         return {

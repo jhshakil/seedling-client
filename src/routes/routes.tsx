@@ -4,6 +4,7 @@ import MainLayout from "../components/layout/MainLayout";
 import Profile from "@/pages/Profile";
 import ProductDetails from "@/pages/ProductDetails";
 import Products from "@/pages/Products";
+import Cart from "@/pages/Cart";
 
 const routes = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const routes = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

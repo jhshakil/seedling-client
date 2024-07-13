@@ -1,0 +1,91 @@
+import { Button, buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { addCart } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { TProduct } from "@/types/product.type";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+
+type Props = {
+  product: TProduct;
+};
+
+const ProductCard = ({ product }: Props) => {
+  const { title, image, category, price, rating, _id } = product;
+
+  const [disableBtn, setDisableBtn] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const { carts } = useAppSelector((state) => state.carts);
+
+  const addToCart = (product: TProduct) => {
+    dispatch(addCart(product));
+    toast("Product AddToCart");
+    disableCart(product);
+  };
+
+  const disableCart = (data: TProduct) => {
+    if (carts) {
+      const product = carts.find((el) => el._id === data._id);
+      if (product) {
+        if (data.quantity <= product.quantity) {
+          setDisableBtn(true);
+        } else {
+          setDisableBtn(false);
+        }
+      }
+    }
+  };
+
+  return (
+    <Card className="w-full">
+      <img
+        className="aspect-square object-cover"
+        src={image}
+        alt="Product Image"
+      />
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>
+          <span className="font-bold">Category:</span> {category}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex justify-between gap-4">
+          <p>
+            <span className="text-lg font-bold">Price:</span> {price}$
+          </p>
+          <p>
+            <span className="text-lg font-bold">Rating:</span> {rating}
+          </p>
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Link
+          to={`/product/${_id}`}
+          className={cn(buttonVariants({ variant: "outline" }))}
+        >
+          Details
+        </Link>
+        <Button
+          disabled={disableBtn}
+          variant={disableBtn ? "destructive" : "default"}
+          onClick={() => addToCart(product)}
+        >
+          {disableBtn ? "Stock Out" : "Add To Cart"}
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+};
+
+export default ProductCard;
