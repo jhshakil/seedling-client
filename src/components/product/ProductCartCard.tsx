@@ -22,7 +22,7 @@ const ProductCartCard = ({ product }: Props) => {
   const dispatch = useAppDispatch();
 
   return (
-    <Card className="w-full grid grid-cols-3 gap-4">
+    <Card className="w-full grid grid-cols-1  md:grid-cols-3 gap-4">
       <div>
         <img
           className="aspect-square object-cover"
@@ -30,7 +30,7 @@ const ProductCartCard = ({ product }: Props) => {
           alt="Product Image"
         />
       </div>
-      <div className="col-span-2 flex flex-col justify-between">
+      <div className="md:col-span-2 flex flex-col justify-between">
         <div>
           <CardHeader>
             <CardTitle>{title}</CardTitle>

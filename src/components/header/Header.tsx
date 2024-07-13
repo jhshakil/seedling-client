@@ -14,12 +14,12 @@ const Header = () => {
   return (
     <div>
       <div className="border-b border-border">
-        <div className="container flex justify-between items-center gap-12 py-7">
+        <div className="container grid grid-cols-2 md:flex justify-between flex-wrap items-center gap-4 md:gap-12 py-7">
           <Logo />
-          <div className="flex-1">
+          <div className="flex-1 col-span-2 order-3 md:order-2">
             <Search />
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 order-2 md:order-3">
             <Link
               to="/profile"
               className={cn(
@@ -37,7 +37,7 @@ const Header = () => {
               )}
             >
               <ShoppingBag className="h-6 w-6" />
-              <Badge className="absolute -top-1 -end-1 px-1.5">
+              <Badge className="absolute -top-1 -end-1 px-1.5 bg-green-600">
                 {carts.length}
               </Badge>
             </Link>
@@ -49,7 +49,7 @@ const Header = () => {
           <div className="flex-1">
             <Navigation />
           </div>
-          <p>Call Support: +880185189184</p>
+          <p className="hidden md:block">Call Support: +880185189184</p>
         </div>
       </div>
     </div>

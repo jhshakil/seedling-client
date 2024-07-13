@@ -5,17 +5,17 @@ import { buttonVariants } from "../ui/button";
 const Hero = () => {
   return (
     <div>
-      <div className="container grid grid-cols-2 gap-5 py-[60px]">
+      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-9 py-[60px]">
         <div className="flex flex-col gap-6">
           <div>
-            <span className="text-green-500 uppercase text-[36px] leading-none">
+            <span className="text-green-500 uppercase text-[22px] md:text-[36px] leading-none">
               #The Stone Series
             </span>
           </div>
-          <h1 className="text-[70px] font-bold leading-none">
+          <h1 className="text-[35px] md:text-[70px] font-bold leading-none">
             Bonsai Tree Nice Collections
           </h1>
-          <p className="text-xl font-medium">
+          <p className="md:text-xl font-medium">
             It has survived not only five centuries, but also the leap into
             electronic typesetting, remaining essentially unchanged.
           </p>

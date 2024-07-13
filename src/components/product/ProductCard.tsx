@@ -30,7 +30,6 @@ const ProductCard = ({ product }: Props) => {
   const { carts } = useAppSelector((state) => state.carts);
 
   const addToCart = (product: TProduct) => {
-    console.log(disableBtn);
     if (!disableBtn) {
       dispatch(addCart(product));
       toast("Product AddToCart");
@@ -65,7 +64,7 @@ const ProductCard = ({ product }: Props) => {
   }, [product, disableCart]);
 
   return (
-    <Card className="w-full">
+    <Card className="w-full h-full">
       <img
         className="aspect-square object-cover"
         src={image}

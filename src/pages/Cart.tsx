@@ -9,7 +9,7 @@ const Cart = () => {
   return (
     <section className="px-8 py-12">
       <h2 className="text-2xl my-4 font-bold text-center">Cart List</h2>
-      <div className="grid grid-cols-2 gap-14">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
         <div>
           {carts && carts.length ? (
             <div className="flex flex-col gap-5 mt-8">

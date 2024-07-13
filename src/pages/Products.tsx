@@ -69,7 +69,7 @@ const Products = () => {
   return (
     <section className="container my-12">
       <h2 className="text-2xl my-4 font-bold text-center">All Products</h2>
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col md:flex-row justify-between md:items-center gap-y-8">
         <div className="flex gap-3 items-center">
           <p className="text-xl font-medium">Filter by category</p>
           <Select onValueChange={(e) => filtering(e)}>
@@ -108,7 +108,7 @@ const Products = () => {
         </div>
       </div>
       {data.data && data.data.length && (
-        <div className="grid grid-cols-4 gap-5 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-8">
           {data.data.map((item: TProduct) => (
             <div key={item._id}>
               <ProductCard product={item} />

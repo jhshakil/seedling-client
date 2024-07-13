@@ -4,8 +4,8 @@ import Logo from "../header/Logo";
 const Footer = () => {
   return (
     <div className="border-t border-border">
-      <div className="container px-12 py-12 grid grid-cols-5 gap-12">
-        <div className="flex flex-col gap-6 col-span-2">
+      <div className="container px-6 md:px-12 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="flex flex-col gap-6 md:col-span-2">
           <Logo />
           <p>
             At Seedling, we are passionate about trees and dedicated to helping

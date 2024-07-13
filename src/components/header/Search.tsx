@@ -59,7 +59,7 @@ const Search = () => {
         </div>
         <div>
           {searchValue && data && data.data && data.data.length ? (
-            <div className="absolute top-14 bg-white left-0 border border-border rounded-lg w-full py-2 px-4 flex flex-col gap-2">
+            <div className="absolute top-14 bg-white left-0 border border-border rounded-lg w-full py-2 px-4 flex flex-col gap-2 z-30">
               {data.data.map((item: TProduct) => (
                 <div key={item._id}>
                   <Link

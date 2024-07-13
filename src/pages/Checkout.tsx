@@ -10,8 +10,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { resetCart } from "@/redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/redux/features/checkout/checkoutApi";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,7 @@ const FormSchema = z.object({
 const Checkout = () => {
   const { carts } = useAppSelector((state) => state.carts);
   const [createOrder, { error }] = useCreateOrderMutation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -55,6 +57,7 @@ const Checkout = () => {
         address: "",
         cash_on_delivery: true,
       });
+      dispatch(resetCart());
       navigate("/");
     }
   }
