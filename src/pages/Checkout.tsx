@@ -59,6 +59,7 @@ const Checkout = () => {
       });
       dispatch(resetCart());
       navigate("/");
+      window.location.reload();
     }
   }
 

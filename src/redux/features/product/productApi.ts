@@ -16,6 +16,9 @@ const productApi = baseApi.injectEndpoints({
           if (data.sort) {
             params.append("sort", data.sort);
           }
+          if (data.limit) {
+            params.append("limit", data.limit);
+          }
         }
 
         return {

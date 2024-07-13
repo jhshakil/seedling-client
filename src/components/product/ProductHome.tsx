@@ -4,7 +4,7 @@ import { TProduct } from "@/types/product.type";
 import ProductCard from "./ProductCard";
 
 const ProductHome = () => {
-  const { data, isLoading, error } = useGetProductsQuery(undefined);
+  const { data, isLoading, error } = useGetProductsQuery({ limit: 4 });
 
   if (isLoading) {
     return (
